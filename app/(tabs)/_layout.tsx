@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
@@ -7,9 +7,24 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import {
+  useSharedValue
+} from 'react-native-reanimated';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const tabBarBottom = useSharedValue(0);
+
+  const [tabBarVisible, setTabBarVisible] = useState(false);
+
+  useEffect(() => {
+    // Reset the tab bar position when the component mounts
+    if (!tabBarVisible) {
+      tabBarBottom.value = -100; // Hide the tab bar
+    } else {
+      tabBarBottom.value = 0; // Show the tab bar
+    }
+  }, [tabBarVisible])
 
   return (
     <Tabs
@@ -22,8 +37,10 @@ export default function TabLayout() {
           ios: {
             // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
+            bottom: tabBarBottom.value,
           },
-          default: {},
+          default: {
+          },
         }),
       }}>
       <Tabs.Screen
@@ -37,6 +54,13 @@ export default function TabLayout() {
         name="explore"
         options={{
           title: 'Explore',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="symptoms"
+        options={{
+          title: 'Symptoms',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
