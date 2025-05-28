@@ -18,10 +18,12 @@ export default function CustomSlider({style, onValueChange}: CustomSliderProps) 
                 minimumValue={0}
                 maximumValue={STEP_COUNT}
                 minimumTrackTintColor="#fff"
-                maximumTrackTintColor="#7C7AC8"
+                maximumTrackTintColor="#F89976"
                 step={1}
                 value={0}
                 trackStyle={{ borderRadius: 16 }}
+                minTrackStyle={{ borderColor: "#FFB9A1", borderWidth: 1 }}
+                maxTrackStyle={{ borderColor: "#FFB9A1", borderWidth: 1 }}
                 trackHeight={60}
                 thumbSize={100}
                 thumbStyle={{ backgroundColor: "transparent" }}
@@ -46,7 +48,7 @@ export default function CustomSlider({style, onValueChange}: CustomSliderProps) 
             </Slider>
             <View style={styles.emojiContainerParent}>
                 <View style={styles.emojiContainer}>
-                    <Text style={styles.emoji}>😩</Text>
+                    <Text style={styles.emoji}>😭</Text>
                     <Text style={styles.emoji}>😍</Text>
                 </View>
             </View>
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     stepMarker: {
         width: 1,
         height: 40,
-        backgroundColor: "#9CB0E3",
+        backgroundColor: "#FFB9A1",
     },
     customThumb: {
         transform: [{scale: 0.8}],
