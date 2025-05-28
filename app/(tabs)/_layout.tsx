@@ -15,14 +15,13 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const tabBarBottom = useSharedValue(0);
 
-  const [tabBarVisible, setTabBarVisible] = useState(false);
+  const [tabBarVisible, setTabBarVisible] = useState(true);
 
   useEffect(() => {
-    // Reset the tab bar position when the component mounts
     if (!tabBarVisible) {
-      tabBarBottom.value = -100; // Hide the tab bar
+      tabBarBottom.value = -100; 
     } else {
-      tabBarBottom.value = 0; // Show the tab bar
+      tabBarBottom.value = 0;
     }
   }, [tabBarVisible])
 
@@ -54,13 +53,6 @@ export default function TabLayout() {
         name="explore"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="symptoms"
-        options={{
-          title: 'Symptoms',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
